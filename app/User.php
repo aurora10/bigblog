@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,6 +40,24 @@ class User extends Authenticatable
 
 
     public function posts() {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'author_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function getBioHtmlAttribute($value) {
+        return $this->bio ? Markdown::convertToHTML(e($this->bio)) : NULL;
+    }
+
+    public function gravatar() {
+        $email = $this->email;
+        $default = asset("http://www.gravatar.com/avatar");
+        $size = 100;
+
+        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+    }
+
 }
