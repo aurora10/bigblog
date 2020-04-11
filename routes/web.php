@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', [
     'uses'=>'BlogController@index',
     'as'=>'blog'
@@ -33,4 +34,20 @@ Route::get('/author/{author}', [
     'uses'=> 'BlogController@author',
     'as' => 'author'
 ]);
+
+
+
+Auth::routes(['register' => false]);
+
+//do disable registration
+
+Route::get('/home', 'Backend\HomeController@index')->name('home');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+//Route::get('/', 'Auth\LoginController@login')->name('login');
+
+Route::resource('/backend/blog', 'Backend\BlogController');
+
+
+
+
 

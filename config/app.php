@@ -139,6 +139,8 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
+        Intervention\Image\ImageServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 
         Illuminate\Auth\AuthServiceProvider::class,
@@ -197,6 +199,7 @@ return [
     'aliases' => [
 
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Image' => Intervention\Image\ImageManagerStatic::class,
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

@@ -44,7 +44,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <p class="copyright">&copy; ggg</p>
+                <p class="copyright">&copy; ggg </p>
             </div>
             <div class="col-md-4">
                 <nav>
@@ -60,6 +60,6 @@
     </div>
 </footer>
 
-<script src="/ js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
