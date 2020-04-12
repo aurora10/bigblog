@@ -65,7 +65,10 @@
                 {!! Form::label('published_at', 'Publish Date') !!}
 
                 <div class='input-group date' id='datetimepicker1'>
-                    {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
+                    {!! Form::text('published_at', null,  ['class' => 'form-control', 'placeholder' => 'Choose date']) !!}
+{{--                    <input type="text" class="form-control" value="{{Carbon\Carbon::now()->format('Y-m-d')." T ".Carbon\Carbon::now()->format('H:i:s')}}" />--}}
+
+                    {{--                    {{ Form::time('tepublished_at', Carbon\Carbon::now()->format('H:i')) }}--}}
                     {{--                                <input type='text' class="form-control"/>--}}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>

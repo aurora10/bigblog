@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 
@@ -14,7 +15,9 @@ class Post extends Model
 //        'view_count' => 1
 //    ];
 
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'category_id', 'image'];
+    use SoftDeletes;
+
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'category_id', 'image', 'view_count'];
 
     protected $dates = ['published_at'];
 
@@ -94,6 +97,18 @@ class Post extends Model
     {
         return $query->where("published_at", "<=", Carbon::now());
     }
+    public function scopeScheduled($query)
+    {
+        return $query->where("published_at", ">", Carbon::now());
+    }
+
+
+    public function scopeDraft($query)
+    {
+        return $query->whereNull("published_at");
+    }
+
+
 
 
     public function getExcerptHtmlAttribute($value)

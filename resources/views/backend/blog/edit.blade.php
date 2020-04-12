@@ -39,6 +39,7 @@
                 <!-- /.box -->
                 {!! Form::close() !!}
             </div>
+        </section>
     </div>
     <!-- ./row -->
 

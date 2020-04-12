@@ -18,11 +18,15 @@
 
         var simplemde2 = new SimpleMDE({element: $("#body")[0]});
 
+
+
         $('#datetimepicker1').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss',
 
-            showClear: true
+            showClear: true,
+
         });
+
 
         $('#draft-btn').click(function (e) {
             e.preventDefault();
