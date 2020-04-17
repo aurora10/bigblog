@@ -43,6 +43,11 @@ Auth::routes(['register' => false]);
 //do disable registration
 
 Route::get('/home', 'Backend\HomeController@index')->name('home');
+Route::get('/edit-account', 'Backend\HomeController@edit');
+Route::put('/edit-account', 'Backend\HomeController@update');
+
+
+
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::put('backend/blog/restore/{blog}', [

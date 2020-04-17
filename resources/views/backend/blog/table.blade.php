@@ -10,20 +10,33 @@
     </thead>
     <tbody>
 
+    <?php $request = request();?>
+
     @foreach($posts as $post)
         <tr>
-            <td >
+            <td>
                 {!! Form::open(['method'=>'DELETE', 'route'=>['blog.destroy', $post->id]]) !!}
-                <a href="{{ route('blog.edit', $post->id) }}"
-                   class="btn btn-xs btn-default">
-                    <i class="fa fa-edit"> </i>
+                @if(check_user_permissions($request, "Blog@edit", $post->id))
+                    <a href="{{ route('blog.edit', $post->id) }}"
+                       class="btn btn-xs btn-default">
+                        <i class="fa fa-edit"> </i>
+                        @else
+                            <a href=""
+                               class="btn btn-xs btn-default disabled">
+                                <i class="fa fa-edit"> </i>
+                                @endif
 
+                                @if(check_user_permissions($request, "Blog@destroy", $post->id))
+                                    <button type="submit" class="btn btn-xs btn-danger">
+                                        <i class="fa fa-trash"> </i>
+                                    </button>
+                                @else
 
-                    <button type="submit"  class="btn btn-xs btn-danger">
-                        <i class="fa fa-trash"> </i>
-                    </button>
+                                    <button type="button" onclick="return false" class="btn btn-xs btn-danger disabled">
+                                        <i class="fa fa-trash"> </i>
+                                    </button>
+                                @endif
             {!! Form::close() !!}
-
 
 
             <td>{{ $post->title }}</td>
