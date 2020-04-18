@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,7 +23,12 @@ class BlogController extends Controller
 //    }])->orderBy('title', 'asc')->get();
 
 //        \DB::enableQueryLog();
-         $posts = Post::with('author')->latestFirst()->published()->simplePaginate($this->limit);
+         $posts = Post::with('author', 'tags', 'category')
+
+             ->latestFirst()
+             ->published()
+             ->filter(request('term'))
+             ->simplePaginate($this->limit);
 
          return view('blog.index', compact('posts'));
         //dd(\DB::getQueryLog());
@@ -48,13 +54,29 @@ class BlogController extends Controller
 
         $posts = $category->posts()
 
-                            ->with('author')
+                            ->with('author', 'tags', 'category')
                             ->latestFirst()
                             ->published()
                             ->simplePaginate($this->limit);
 
         return view('blog.index', compact('posts', 'categoryName'));
         //dd(\DB::getQueryLog());
+    }
+
+    public function tag(Tag $tag) {
+
+        $tagName = $tag->title;
+
+
+        $posts = $tag->posts()
+
+            ->with('author', 'tags')
+            ->latestFirst()
+            ->published()
+            ->simplePaginate($this->limit);
+
+        return view('blog.index', compact('posts', 'tagName'));
+
     }
 
     public function show(Post $post) {
@@ -74,7 +96,7 @@ class BlogController extends Controller
 
          $posts = $author->posts()
 
-                            ->with('category')
+                            ->with('category', 'tags')
                             ->latestFirst()
                             ->published()
                             ->simplePaginate($this->limit);

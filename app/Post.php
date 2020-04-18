@@ -39,6 +39,14 @@ class Post extends Model
     }
 
 
+    public function tags() {
+       return $this->belongsToMany(Tag::class);
+    }
+
+
+
+
+
     public function getImageUrlAttribute($value)
     {
 
@@ -108,6 +116,23 @@ class Post extends Model
         return $query->whereNull("published_at");
     }
 
+    public function scopeFilter($query, $term) {
+        if ($term) {
+            $query->where(function($q) use ($term) {
+                $q->whereHas('author', function ($qr) use ($term) {
+                    $qr->where('name', 'LIKE', "%{$term}%");
+                });
+
+                $q->orwhereHas('category', function ($qr) use ($term) {
+                    $qr->where('title', 'LIKE', "%{$term}%");
+                });
+
+                $q->orwhere('title', 'LIKE', "%{$term}%");
+                $q->orwhere('excerpt', 'LIKE', "%{$term}%");
+                $q->orwhere('body', 'LIKE', "%{$term}%");
+            });
+        }
+    }
 
 
 
@@ -119,6 +144,17 @@ class Post extends Model
     public function getBodyHtmlAttribute($value)
     {
         return $this->body ? Markdown::convertToHTML(e($this->body)) : NULL;
+    }
+
+    public function getTagsHtmlAttribute($value) {
+
+        $anchors = [];
+
+        foreach($this->tags as $tag) {
+            $anchors[] = '<a href=" ' . route('tag', $tag->slug) . '">' . $tag->name . ' </a>';
+        }
+
+        return implode(",", $anchors);
     }
 
     public function dateFormatted($showTimes = false)
