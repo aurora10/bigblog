@@ -1,5 +1,7 @@
 <?php
 
+use App\Category;
+use App\Post;
 use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
@@ -31,7 +33,7 @@ class CategoriesTableSeeder extends Seeder
             ],
 
             [
-                'title'=>'Social Media Marketing',
+                'title'=>'Socia  l Media Marketing',
                 'slug'=>'social-media-marketing'
             ],
 
@@ -42,11 +44,15 @@ class CategoriesTableSeeder extends Seeder
 
         ]);
 
-        for ($post_id =1; $post_id <= 10; $post_id++) {
+        $categories = Category::pluck('id');
 
-            $category_id = rand(1,5);
+        foreach (  Post::pluck('id') as $postId) {
 
-            DB::table('posts')->where('id', $post_id)->update(['category_id' => $category_id ]);
+            $categoryId = $categories[rand(0, $categories->count()-1)];
+
+            DB::table('posts')
+                ->where('id', $postId)
+                ->update(['category_id' => $categoryId ]);
         }
 
     }

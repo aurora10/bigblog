@@ -1,93 +1,76 @@
-<article class="post-comments">
-    <h3><i class="fa fa-comments"></i> 5 Comments</h3>
+<article class="post-comments"   id="post-comments"  >
+    <h3><i class="fa fa-comments"></i> {{ $post->commentsNumber('Comment') }}</h3>
 
     <div class="comment-body padding-10">
         <ul class="comments-list">
-            <li class="comment-item">
-                <div class="comment-heading clearfix">
-                    <div class="comment-author-meta">
-                        <h4>John Doe <small>January 14, 2016</small></h4>
+
+            @foreach($postComments as $comment)
+                <li class="comment-item">
+
+                    <div class="comment-heading clearfix">
+                        <div class="comment-author-meta">
+                            <h4>{{ $comment->author_name }} <small>{{ $comment->date }}</small></h4>
+                        </div>
                     </div>
-                </div>
-                <div class="comment-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nesciunt nulla est, atque ratione nostrum cumque ducimus maxime, amet enim tempore ipsam. Id ea, veniam ipsam perspiciatis assumenda magnam doloribus!</p>
-                    <p>Quibusdam iusto culpa, necessitatibus, libero sequi quae commodi ea ab non facilis enim vitae inventore laborum hic unde esse debitis. Adipisci nostrum reprehenderit explicabo, non molestias aliquid quibusdam tempore. Vel.</p>
-                </div>
-            </li>
+                    <div class="comment-content">
 
-            <li class="comment-item">
-                <div class="comment-heading clearfix">
-                    <div class="comment-author-meta">
-                        <h4>John Doe <small>January 14, 2016</small></h4>
+                        {!! $comment->body_html  !!}
+
                     </div>
-                </div>
-                <div class="comment-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nesciunt nulla est, atque ratione nostrum cumque ducimus maxime, amet enim tempore ipsam. Id ea, veniam ipsam perspiciatis assumenda magnam doloribus!</p>
-                    <p>Quibusdam iusto culpa, necessitatibus, libero sequi quae commodi ea ab non facilis enim vitae inventore laborum hic unde esse debitis. Adipisci nostrum reprehenderit explicabo, non molestias aliquid quibusdam tempore. Vel.</p>
+                </li>
+            @endforeach
 
-                    <ul class="comments-list-children">
-                        <li class="comment-item">
-                            <div class="comment-heading clearfix">
-                                <div class="comment-author-meta">
-                                    <h4>John Doe <small>January 14, 2016</small></h4>
-                                </div>
-                            </div>
-                            <div class="comment-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nesciunt nulla est, atque ratione nostrum cumque ducimus maxime, amet enim tempore ipsam. Id ea, veniam ipsam perspiciatis assumenda magnam doloribus!</p>
-                                <p>Quibusdam iusto culpa, necessitatibus, libero sequi quae commodi ea ab non facilis enim vitae inventore laborum hic unde esse debitis. Adipisci nostrum reprehenderit explicabo, non molestias aliquid quibusdam tempore. Vel.</p>
-                            </div>
-                        </li>
 
-                        <li class="comment-item">
-                            <div class="comment-heading clearfix">
-                                <div class="comment-author-meta">
-                                    <h4>John Doe <small>January 14, 2016</small></h4>
-                                </div>
-                            </div>
-                            <div class="comment-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nesciunt nulla est, atque ratione nostrum cumque ducimus maxime, amet enim tempore ipsam. Id ea, veniam ipsam perspiciatis assumenda magnam doloribus!</p>
-                                <p>Quibusdam iusto culpa, necessitatibus, libero sequi quae commodi ea ab non facilis enim vitae inventore laborum hic unde esse debitis. Adipisci nostrum reprehenderit explicabo, non molestias aliquid quibusdam tempore. Vel.</p>
 
-                                <ul class="comments-list-children">
-                                    <li class="comment-item">
-                                        <div class="comment-heading clearfix">
-                                            <div class="comment-author-meta">
-                                                <h4>John Doe <small>January 14, 2016</small></h4>
-                                            </div>
-                                        </div>
-                                        <div class="comment-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nesciunt nulla est, atque ratione nostrum cumque ducimus maxime, amet enim tempore ipsam. Id ea, veniam ipsam perspiciatis assumenda magnam doloribus!</p>
-                                            <p>Quibusdam iusto culpa, necessitatibus, libero sequi quae commodi ea ab non facilis enim vitae inventore laborum hic unde esse debitis. Adipisci nostrum reprehenderit explicabo, non molestias aliquid quibusdam tempore. Vel.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
         </ul>
+
+        <nav>
+            {!! $postComments->links() !!}
+        </nav>
 
     </div>
 
     <div class="comment-footer padding-10">
         <h3>Leave a comment</h3>
-        <form>
-            <div class="form-group required">
+            @if(session('message'))
+                <div class="alert alert-info">
+                    {{ session('message') }}
+                </div>
+            @endif
+
+
+
+        {!! Form::open(['route' => ['blog.comments', $post->slug]]) !!}
+            <div class="form-group required {{ $errors->has('author_name') ? 'has-error' : '' }}">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="form-control">
+                {!! Form::text('author_name', null, ['class'=> 'form-control']) !!}
+                @if($errors->has('author_name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('author_name') }}</strong>
+                    </span>
+                @endif
             </div>
-            <div class="form-group required">
+            <div class="form-group required {{ $errors->has('author_email') ? 'has-error' : '' }}">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" class="form-control">
+                {!! Form::text('author_email', null, ['class'=> 'form-control']) !!}
+                @if($errors->has('author_email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('author_email') }}</strong>
+                    </span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="website">Website</label>
-                <input type="text" name="website" id="website" class="form-control">
+                {!! Form::text('author_url', null, ['class'=> 'form-control']) !!}
             </div>
-            <div class="form-group required">
+            <div class="form-group required {{ $errors->has('body') ? 'has-error' : '' }}">
                 <label for="comment">Comment</label>
-                <textarea name="comment" id="comment" rows="6" class="form-control"></textarea>
+                {!! Form::textarea('body', null, ['row'=>6, 'class' => 'form-control']) !!}
+                @if($errors->has('body'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('body') }}</strong>
+                    </span>
+                @endif
             </div>
             <div class="clearfix">
                 <div class="pull-left">
@@ -100,7 +83,7 @@
                     </p>
                 </div>
             </div>
-        </form>
+        {!! Form::close() !!}
     </div>
 
 </article>

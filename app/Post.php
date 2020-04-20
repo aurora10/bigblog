@@ -3,9 +3,11 @@
 namespace App;
 
 use Carbon\Carbon;
-use GrahamCampbell\Markdown\Facades\Markdown;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use GrahamCampbell\Markdown\Facades\Markdown;
+
 
 class Post extends Model
 
@@ -32,6 +34,23 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function commentsNumber($label = 'Comment') {
+        $commentsNumber = $this->comments->count();
+        return $commentsNumber . " " . str_plural($label, $commentsNumber);
+    }
+
+    public function createComment(array $data) {
+         $this->comments()->create($data);
+    }
+
+
+
+
 
     public function setPublishedAtAttribute($value)
     {
@@ -116,8 +135,17 @@ class Post extends Model
         return $query->whereNull("published_at");
     }
 
-    public function scopeFilter($query, $term) {
-        if ($term) {
+    public function scopeFilter($query, $filter) {
+
+        if (isset($filter['month']) && $month = $filter['month']) {
+            $query->whereRaw('month(published_at) = ?', [Carbon::parse($month)->month]);
+        }
+
+        if (isset($filter['year']) && $year   = $filter['year']) {
+            $query->whereRaw('year(published_at) = ?', [$year]);
+        }
+
+        if (isset($filter['term']) && $term = $filter['term']) {
             $query->where(function($q) use ($term) {
                 $q->whereHas('author', function ($qr) use ($term) {
                     $qr->where('name', 'LIKE', "%{$term}%");
@@ -151,7 +179,7 @@ class Post extends Model
         $anchors = [];
 
         foreach($this->tags as $tag) {
-            $anchors[] = '<a href=" ' . route('tag', $tag->slug) . '">' . $tag->name . ' </a>';
+            $anchors[] = '<a href="' . route('tag', $tag->slug) . ' "> ' . $tag->name . '</a>';
         }
 
         return implode(",", $anchors);

@@ -23,11 +23,11 @@ class BlogController extends Controller
 //    }])->orderBy('title', 'asc')->get();
 
 //        \DB::enableQueryLog();
-         $posts = Post::with('author', 'tags', 'category')
+         $posts = Post::with('author', 'tags', 'category', 'comments')
 
              ->latestFirst()
              ->published()
-             ->filter(request('term'))
+             ->filter(request()->only(['term', 'month', 'year']))
              ->simplePaginate($this->limit);
 
          return view('blog.index', compact('posts'));
@@ -54,7 +54,7 @@ class BlogController extends Controller
 
         $posts = $category->posts()
 
-                            ->with('author', 'tags', 'category')
+                            ->with('author', 'tags', 'category', 'comments')
                             ->latestFirst()
                             ->published()
                             ->simplePaginate($this->limit);
@@ -70,7 +70,7 @@ class BlogController extends Controller
 
         $posts = $tag->posts()
 
-            ->with('author', 'tags')
+            ->with('author', 'tags', 'comments')
             ->latestFirst()
             ->published()
             ->simplePaginate($this->limit);
@@ -84,7 +84,10 @@ class BlogController extends Controller
         //$post = Post::published()->findOrFail($id);
 
         $post->increment('view_count');
-        return view('blog.show', compact('post'));
+
+        $postComments = $post->comments()->simplePaginate(6);
+
+        return view('blog.show', compact('post', 'postComments'));
 
     }
 
@@ -96,7 +99,7 @@ class BlogController extends Controller
 
          $posts = $author->posts()
 
-                            ->with('category', 'tags')
+                            ->with('category', 'tags', 'comments ')
                             ->latestFirst()
                             ->published()
                             ->simplePaginate($this->limit);
