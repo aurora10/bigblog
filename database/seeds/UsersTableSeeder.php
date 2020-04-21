@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory;
+
 
 class  UsersTableSeeder extends Seeder
 {
@@ -16,35 +16,56 @@ class  UsersTableSeeder extends Seeder
 
         DB::table('users')->truncate();
 
-        $faker = Factory::create();
-
-        DB::table('users')->insert([
-
-             [
-                'name'=>'John Doe',
-                'slug'=>'john-doe',
-                'email'=>'johndoe@test.com',
-                'password'=>bcrypt('secret'),
-                 'bio'=> $faker->text(rand(250, 300))
-            ],
-
-            [
-                'name'=>'Jane Doe',
-                'slug'=>'jane-doe',
-                'email'=>'janedoe@test.com',
-                'password'=>bcrypt('secret'),
-                'bio'=> $faker->text(rand(250, 300))
-            ],
-
-            [
-                'name'=>'Rob Smith',
-                'slug'=>'rob-smith',
-                'email'=>'robsmith@test.com',
-                'password'=>bcrypt('secret'),
-                'bio'=> $faker->text(rand(250, 300))
-            ],
 
 
-        ]);
+        if (env('APP_ENV') === 'local') {
+
+            $faker = \Faker\Factory::create();
+
+            DB::table('users')->insert([
+
+                [
+                    'name'=>'John Doe',
+                    'slug'=>'john-doe',
+                    'email'=>'johndoe@test.com',
+                    'password'=>bcrypt('secret'),
+                    'bio'=> $faker->text(rand(250, 300))
+                ],
+
+                [
+                    'name'=>'Jane Doe',
+                    'slug'=>'jane-doe',
+                    'email'=>'janedoe@test.com',
+                    'password'=>bcrypt('secret'),
+                    'bio'=> $faker->text(rand(250, 300))
+                ],
+
+                [
+                    'name'=>'Rob Smith',
+                    'slug'=>'rob-smith',
+                    'email'=>'robsmith@test.com',
+                    'password'=>bcrypt('secret'),
+                    'bio'=> $faker->text(rand(250, 300))
+                ],
+
+
+            ]);
+        }
+        else {
+            DB::table('users')->insert([
+
+                [
+                    'name'=>'Administrator',
+                    'slug'=>'admin',
+                    'email'=>'admin@admin.com',
+                    'password'=>bcrypt('!Prodigy55'),
+                    'bio'=> "I am Admin"
+                ],
+
+
+            ]);
+        }
+
+
     }
 }

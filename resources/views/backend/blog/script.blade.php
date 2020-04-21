@@ -1,5 +1,29 @@
+@section('style')
+    <link rel="stylesheet" href="/backend/plugins/tag-editor/jquery.tag-editor.css">
+@endsection
+
+
 @section('script')
+
+
+    <script src="/backend/plugins/tag-editor/jquery.caret.min.js"></script>
+    <script src="/backend/plugins/tag-editor/jquery.tag-editor.min.js"></script>
     <script type="text/javascript">
+
+
+        $('input[name=post_tags]').tagEditor(options);
+
+        var options = {};
+
+        @if($post->exists)
+            options = {
+            initialTags: {!! $post->tags_list !!},
+            };
+        @endif
+
+
+
+
         $('ul.pagination').addClass('no-margin pagination-sm');
 
         $('#title').on('blur', function () {
@@ -8,7 +32,8 @@
 
                 theSlug = theTitle.replace(/&/g, '-and-')
                     .replace(/[^a-z0-9-]+/g, '-')
-                    .replace(/\-\-+/g, '-')
+                    // .replace([\u0400-\u04FF])
+                    .replace("/^[\p{L}]+$/u")
                     .replace(/^-+|-+$/g, '');
 
             slugInput.val(theSlug);
@@ -35,6 +60,12 @@
         });
 
 
+
     </script>
 
+
+
 @endsection
+
+
+

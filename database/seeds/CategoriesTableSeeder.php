@@ -15,34 +15,51 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->truncate();
 
-        DB::table('categories')->insert([
+        if (env('APP_ENV') === 'local') {
+            DB::table('categories')->insert([
 
-            [
-                'title'=>'Web Design',
-                'slug'=>'web-design'
-            ],
+                [
+                    'title'=>'Web Design',
+                    'slug'=>'web-design'
+                ],
 
-            [
-                'title'=>'Web Programming',
-                'slug'=>'web-programming'
-            ],
+                [
+                    'title'=>'Web Programming',
+                    'slug'=>'web-programming'
+                ],
 
-            [
-                'title'=>'Internet',
-                'slug'=>'internet'
-            ],
+                [
+                    'title'=>'Internet',
+                    'slug'=>'internet'
+                ],
 
-            [
-                'title'=>'Socia  l Media Marketing',
-                'slug'=>'social-media-marketing'
-            ],
+                [
+                    'title'=>'Socia  l Media Marketing',
+                    'slug'=>'social-media-marketing'
+                ],
 
-            [
-                'title'=>'Photography',
-                'slug'=>'photography'
-            ],
+                [
+                    'title'=>'Photography',
+                    'slug'=>'photography'
+                ],
 
-        ]);
+            ]);
+
+        }
+
+        else {
+
+            DB::table('categories')->insert([
+
+
+                'title'=>'Uncategorized',
+                'slug'=>'uncategorized'
+            ]);
+        }
+
+
+
+
 
         $categories = Category::pluck('id');
 

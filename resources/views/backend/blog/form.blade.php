@@ -17,7 +17,7 @@
 
         </div>
 
-        <div class="form-group {{ $errors->has('slug') ? 'has-error': '' }}">
+        <div class="form-group  {{ $errors->has('slug') ? 'has-error': '' }}">
             {!! Form::label('slug') !!}
             {!! Form::text('slug', null, ['class'=>'form-control']) !!}
             @if($errors->has('slug'))
@@ -37,6 +37,8 @@
                 <span class="help-block">{{$errors->first('body')}}</span>
             @endif
         </div>
+
+
 
 
         <br>
@@ -136,6 +138,17 @@
                     <span class="help-block">{{$errors->first('image')}}</span>
                 @endif
 
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tags</h3>
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                {!! Form::text('post_tags', null, ['class' => 'form-control']) !!}
             </div>
         </div>
     </div>

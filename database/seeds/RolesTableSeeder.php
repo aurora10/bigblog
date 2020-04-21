@@ -31,17 +31,24 @@ class RolesTableSeeder extends Seeder
         $author->display_name = 'Author';
         $author->save();
 
-        $user1 = User::find(1);
+
+
+
+        $user1 = User::first();
         $user1->detachRole($admin);
         $user1->attachRole($admin);
 
-        $user2 = User::find(2);
-        $user2->detachRole($editor);
-        $user2->attachRole($editor);
 
-        $user3 = User::find(3);
-        $user3->detachRole($author);
-        $user3->attachRole($author);
+        if (env('APP_ENV') === 'local') {
+            $user2 = User::find(2);
+            $user2->detachRole($editor);
+            $user2->attachRole($editor);
+
+            $user3 = User::find(3);
+            $user3->detachRole($author);
+            $user3->attachRole($author);
+        }
+
 
 
 
