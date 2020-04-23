@@ -9,10 +9,10 @@
 
                     <div class="comment-heading clearfix">
                         <div class="comment-author-meta">
-                            <h4>{{ $comment->author_name }} <small>{{ $comment->date }}</small></h4>
+                            <h4 style="color: rgba(239,209,117,1)">{{ $comment->author_name }} <small style="color: rgba(83,196,186,1)">{{ $comment->date }}</small></h4>
                         </div>
                     </div>
-                    <div class="comment-content">
+                    <div class="comment-content" style="color: rgba(128,234,52,1)">
 
                         {!! $comment->body_html  !!}
 

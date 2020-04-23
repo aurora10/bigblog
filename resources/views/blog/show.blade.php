@@ -59,7 +59,7 @@
 
                                             </a>
                                         </div>
-                                        <p > {!! $post->author->bio_html !!}</p>
+                                        <p  > {!! $post->author->bio_html !!}</p>
                                     </div>
                                 </div>
                             </article>

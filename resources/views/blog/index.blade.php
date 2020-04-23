@@ -1,4 +1,4 @@
-@extends('app');
+@extends('app')
 
 @section('content')
 
@@ -61,7 +61,7 @@
                     @endforeach
                 @endif
 
-                <nav>
+                <nav >
                     {{$posts->appends(request()->only(['term', 'month', 'year']))->links()}}
                 </nav>
             </div>

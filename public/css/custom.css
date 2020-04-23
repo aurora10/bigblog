@@ -258,7 +258,7 @@ ul.popular-posts li img {
 }
 
 ul.popular-posts li span, .post-author-count a {
-    color: #aaa;
+    color: rgba(83,196,186,1);
 }
 
 .popular-posts .post-image {
@@ -401,4 +401,21 @@ textarea.form-control {
 label {
     color: rgba(128,234,52,1);
     font-family: 'Raleway', serif;
+}
+
+.form-control{
+    background-color: #393900;
+    color: rgba(128,234,52,1);
+}
+
+.pagination > li > a {
+    /*position: relative;*/
+    /*float: left;*/
+    /*padding: 6px 12px;*/
+    /*margin-left: -1px;*/
+    /*line-height: 1.42857143;*/
+    /*!*color: #337ab7;*!*/
+    /*text-decoration: none;*/
+    /*background-color: #255044;*/
+    /*border: 1px solid #ddd;*/
 }

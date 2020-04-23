@@ -30,7 +30,7 @@
                 </button>
 
 
-                <a class="navbar-brand " style="padding-top: 2.0rem;" href="{{ route('blog') }}">Tons of Things</a>
+                <a class="navbar-brand " style="padding-top: 2.0rem" href="{{ route('blog') }}">Tons of Things</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -45,7 +45,7 @@
     </nav>
 </header>
 
-@yield('content');
+@yield('content')
 
 <footer>
     <div class="container">
