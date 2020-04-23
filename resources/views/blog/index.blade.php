@@ -39,7 +39,7 @@
                                             <li><i class="fa fa-user"></i><a
                                                     href="{{ route('author', $post->author->slug) }}">{{$post->author->name}}</a>
                                             </li>
-                                            <li><i class="fa fa-clock-o"></i>
+                                            <li><i class="fa fa-clock-o" style="color: rgba(83,196,186,1)"></i>
                                                 <time> {{ $post-> date }}</time>
                                             </li>
                                             <li><i class="fa fa-folder"></i><a

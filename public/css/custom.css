@@ -9,14 +9,17 @@ body {
     color: #777;
 
 
-    background: #fcfcfc  url("../img/body-bg.png");
+    /*background:  url("../img/body-bg.png");*/
+    background-color: #393900 !important;
 }
 
 a {
-    color: #333;
+    color: rgba(128,234,52,1);
 }
 
 a:hover {
+
+    color: #66BB2A;
     text-decoration: none;
 }
 
@@ -33,12 +36,13 @@ a:hover {
 }
 
 header .navbar-default, .post-item, .widget, footer, .post-author, .post-comments {
-    background: #fff;
+    /*background: #fff;*/
+
 }
 
 .post-item {
     margin-bottom: 40px;
-    color: #525252;
+    color: rgba(128,234,52,1);
 }
 
 .post-item p {
@@ -64,6 +68,7 @@ header .navbar-default, .post-item, .widget, footer, .post-author, .post-comment
     border: 1px solid #e7e7e7;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
     /*border: 1px solid #e7e7e7;*/
+    border-radius: 5px;
 }
 
 .post-item-body h2, .post-item-body h1 {
@@ -92,7 +97,7 @@ header .navbar-default, .post-item, .widget, footer, .post-author, .post-comment
 }
 
 .post-item-body .post-meta a {
-    color: #999;
+    color: rgba(239,209,117,1);
 }
 
 .post-item-body .post-meta a:hover {
@@ -122,6 +127,7 @@ ul.post-meta-group li i {
 
 .post-author {
     font-size: 13px;
+    color: rgba(128,234,52,1);
     /*background: rgba(0, 0, 0, 0.02) none repeat scroll 0 0;*/
 }
 
@@ -199,6 +205,7 @@ li.comment-item:first-child {
 
 .widget {
     border: 1px solid #e7e7e7;
+    border-radius: 5px;
     /*border: 1px solid transparent;*/
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
 }
@@ -211,7 +218,7 @@ li.comment-item:first-child {
 
 .widget-heading h4 {
     margin: 0;
-    color: #888;
+    color: rgba(239,209,117,1);
     letter-spacing: 0.6px;
     text-transform: uppercase;
     font-weight: 600;
@@ -282,7 +289,7 @@ ul.popular-posts li span, .post-author-count a {
 }
 
 .comment-footer {
-    background: #fff;
+    /*background: #fff;*/
     border-top: 1px solid #e7e7e7;
 }
 
@@ -293,7 +300,7 @@ ul.tags li {
 
 ul.tags li a {
     border: 1px solid #e7e7e7;
-    color: #333;
+    /*color: #333;*/
     font-size: 13px;
     padding: 5px 8px;
     text-decoration:none;
@@ -330,9 +337,9 @@ ul.social-icons li {
 }
 
 .form-control, .btn {
-  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
 }
 
 .form-group.required label:after {
@@ -342,4 +349,56 @@ ul.social-icons li {
 
 span.required {
     color: red;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: rgba(83,196,186,1);
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: rgba(83,196,186,1);
+    background-color: transparent;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    height: 59px !important;
+    background-color: #393900;
+}
+
+.green-eye img {
+    width: 60px;
+    height: 60px;
+    position: absolute; margin-left: 50px;
+
+}
+
+.navbar-default .navbar-brand {
+    color: rgba(83,196,186,1);
+}
+
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.badge {
+    background-color: rgb(239, 209, 117);
+    color: #255044;
+}
+
+.post-comments h3 {
+    color: rgba(239,209,117,1);
+}
+
+.btn-success {
+    background-color: rgb(83, 196, 186);
+}
+
+textarea.form-control {
+
+}
+
+label {
+    color: rgba(128,234,52,1);
+    font-family: 'Raleway', serif;
 }

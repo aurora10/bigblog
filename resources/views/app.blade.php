@@ -13,22 +13,29 @@
 
 
 <header>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default  navbar-fixed-top">
+        <div class="green-eye">
+            <img src="/img/green-eye.gif"  alt="">
+        </div>
         <div class="container">
+
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#the-navbar-collapse" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('blog') }}">Tons of Things</a>
+
+
+                <a class="navbar-brand " style="padding-top: 2.0rem;" href="{{ route('blog') }}">Tons of Things</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="the-navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="padding-top: 0.5rem;">
                     <li class="active"><a href="{{route('blog')}}">Blog</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
