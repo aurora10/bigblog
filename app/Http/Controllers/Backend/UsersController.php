@@ -115,7 +115,7 @@ class UsersController extends BackendController
         }
 
 
-       //   $user->delete();
+          $user->delete();
         return redirect('backend/users')->with("message", "User was deleted");
     }
 
